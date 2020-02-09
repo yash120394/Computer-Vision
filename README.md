@@ -1,3 +1,7 @@
+# Objective
+
+- Apply different kernel filters on images
+
 # Packages used 
 - Numpy (convolve function)
 - Numpy (svd function)
