@@ -11,21 +11,20 @@ from HoughSpace import EdgeDetection, get_staff_and_spacing_parameter
 import pandas as pd
 
 # Input music and template images
-DATA_DIR  = '/u/yashkuma/hrpaul-mrlatnek-sumgarg-yashkuma-a1/python-sample'
 music_file = sys.argv[1]
 template1_file = 'template1.png'
 template2_file = 'template2.png'
 template3_file = 'template3.png'
 
 # getting space and starting position parameter
-EdgeMatrix = EdgeDetection(os.path.join(DATA_DIR, music_file), self = False)
+EdgeMatrix = EdgeDetection(music_file, self = False)
 space, starting_positions = get_staff_and_spacing_parameter(EdgeMatrix)
 
 # reading images and templates
-im = Image.open(os.path.join(DATA_DIR, music_file),mode="r").convert('L')
-temp1 = Image.open(os.path.join(DATA_DIR,template1_file),mode="r").convert('L')
-temp2 = Image.open(os.path.join(DATA_DIR,template2_file),mode="r").convert('L')
-temp3 = Image.open(os.path.join(DATA_DIR,template3_file),mode="r").convert('L')
+im = Image.open(music_file,mode="r").convert('L')
+temp1 = Image.open(template1_file,mode="r").convert('L')
+temp2 = Image.open(template2_file,mode="r").convert('L')
+temp3 = Image.open(template3_file,mode="r").convert('L')
 
 # convert into array and scale
 im_array = np.array(im)
@@ -197,7 +196,7 @@ for i in range(len(x3)):
     draw.text((y3_1-10,x3_1-10), "eighth",fill='blue')
 
 # saving detected notes, quarter and eighth image file
-im1.save(os.path.join(DATA_DIR, 'detected.png'))
+im1.save('detected.png')
 
 # saving detected .txt file having row, col, height, width, symbol and confidence 
-detect_temp.to_csv(os.path.join(DATA_DIR, 'detected.txt'), header=False, index=False, sep='\t')
+detect_temp.to_csv( 'detected.txt', header=False, index=False, sep='\t')
